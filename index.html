@@ -8,13 +8,73 @@
 
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="utf-8" />
-
+  <meta name="viewport" content="width=device-width">
+  <title>Cornetti</title>
 </head>
 
 <body>
   <script src="sketch.js"></script>
   <script src="bird.js"></script>
   <script src="pipe.js"></script>
+  <header>
+
+    <nav class="navbar">
+      <span class="open-slide">
+        <a href="#" onclick="openSlideMenu()">
+          <svg width="30" height="30">
+              <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+              <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+              <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+          </svg>
+        </a>
+      </span>
+
+      <ul class="navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Prodotti</a></li>
+        <li><a href="#">Chi siamo</a></li>
+        <li><a href="#">Altro</a></li>
+      </ul>
+    </nav>
+
+    <div id="side-menu" class="side-nav">
+      <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+      <a href="#">Home</a>
+      <a href="#">Prodotti</a>
+      <a href="#">Chi Siamo</a>
+      <a href="#">Altro</a>
+    </div>
+
+    <div id="main">
+      <h1>Titolo che decide Nicky!</h1>
+    </div>
+
+    <script>
+      function openSlideMenu(){
+        document.getElementById('side-menu').style.width = '275px';
+        document.getElementById('main').style.marginLeft = '250px';
+      }
+
+      function closeSlideMenu(){
+
+        document.getElementById('side-menu').style.width = '0';
+        document.getElementById('main').style.marginLeft = '0';
+      }
+    </script>
+
+<section id="quadrato">
+  <form class="azioni"id="login" action="#" >
+<input id="palazzo"type="submit" class="button" value="Login">
+  </form>
+
+  <form class="azioni "id="registrati" action="#" >
+<input id="casa"type="submit" class="button" value="Registrati">
+  </form>
+</section>
+<footer id="foot">
+  <p>Copyright &copy; Nicole </p>
+</footer>
+
 </body>
 
 </html>
