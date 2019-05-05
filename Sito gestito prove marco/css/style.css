@@ -4,15 +4,21 @@ font: 15px/1.5 Arial, Helvetica, sans-serif;
 padding: 0px;
 margin: 0px;
 min-height: 400px;
-background:  url(/images/Tazza.png ) no-repeat 0 -600px  ;
+background:  url(/images/Tazza.png ) no-repeat center top; position: fixed; z-index: -1;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
 overflow: hidden;
 }
 
-.navbar{
-  background-color: #3b5998;
-  overflow: hidden;
-  height: 63px;
-
+.button{
+  font-size:0.875em;
+        display:block;
+        left:-60px;
+        margin-top:35px;
+        width:50%;
+        moz
 }
  .navbar a{
    float: left;
@@ -86,7 +92,7 @@ margin: 20px;
 }
 
 
-.button{background-color: rgb(220,10,18);
+.button{background-color: rgb(220,80,18);
   border: none;
   font-size: 22px;
   margin: 20px;
