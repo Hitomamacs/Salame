@@ -4,7 +4,7 @@ font: 15px/1.5 Arial, Helvetica, sans-serif;
 padding: 0px;
 margin: 0px;
 min-height: 400px;
-background:  url(/images/Tazza.png ) no-repeat center top; position: fixed; z-index: -1;
+background:  url(../images/Tazza.png ) no-repeat center top; position: fixed; z-index: -1;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
