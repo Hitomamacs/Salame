@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container" id="container">
+  	<div class="form-container sign-up-container">
+  		<form action="#">
+  			<h1>Crea un Account Account</h1>
+
+  			<span>usa la tua email per regitrarti</span>
+  			<input type="text" placeholder="Nome" />
+  			<input type="email" placeholder="Email" />
+  			<input type="password" placeholder="Password" />
+  			<button>Registrati</button>
+  		</form>
+  	</div>
+  	<div class="form-container sign-in-container">
+  		<form action="#">
+  			<h1>Login</h1>
+
+  			<span>usando il tuo account</span>
+  			<input type="email" placeholder="Email" />
+  			<input type="password" placeholder="Password" />
+  			<a href="#">Hai dimenticato la psw?</a>
+  			<button>Login</button>
+  		</form>
+  	</div>
+  	<div class="overlay-container">
+  		<div class="overlay">
+  			<div class="overlay-panel overlay-left">
+  				<h1>Bentornato!</h1>
+  				<p>Fai il login</p>
+  				<button class="ghost" id="signIn">Login</button>
+  			</div>
+  			<div class="overlay-panel overlay-right">
+  				<h1>Sei nuovo? Registrtati!</h1>
+  				<p>Inserisci i tuoi dati per registrarti</p>
+  				<button class="ghost" id="signUp">Registrarti!</button>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+
+  <footer>
+  	<p>
+      copyright della patata &copy 
+    </p>
+
+
+  </footer>
+  <script type="text/javascript">
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+      container.classList.add('right-panel-active');
+    });
+
+    signInButton.addEventListener('click', () => {
+      container.classList.remove('right-panel-active');
+    });
+  </script>
+</body>
+
+</html>
