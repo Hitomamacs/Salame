@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import sklearn.preprocessing
+from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout, Flatten, Bidirectional
 from sklearn.cluster import KMeans
@@ -112,7 +112,6 @@ Data['Type'] = pd.Categorical(Data['Type'])
 Type_encoded = pd.get_dummies(Data['Type'], prefix = 'tipologia')
 Data = pd.concat([Data, Type_encoded], axis=1)
 Data.drop(Data.columns[1], axis=1, inplace=True)
-
 #%% One-hot encodiamo i Magnitude Type:
 Data['Magnitude Type'] = pd.Categorical(Data['Magnitude Type'])
 Magnitude_encoded = pd.get_dummies(Data['Magnitude Type'], prefix = 'tipo_magnitudo')
@@ -120,4 +119,54 @@ Data = pd.concat([Data, Magnitude_encoded], axis=1)
 Data.drop(Data.columns[5], axis=1, inplace=True)
 Data.dtypes
 
-#Normalizziamo il resto dei dati:
+#%%Normalizziamo il resto dei dati:
+#qui abbiamo normalizzato la Depth
+Data_scaled = Data
+scaler_1 = MinMaxScaler()
+Depth_sk = np.array(Data.iloc[:,1])
+Depth_sk = Depth_sk.reshape(-1,1)
+Depth_sk = scaler_1.fit_transform(Depth_sk)
+Data_scaled.iloc[:,1] = Depth_sk
+Data_scaled.head()
+#%% Depth Error 4.993115
+import math
+Deptherr_sk = list(Data.iloc[:,2])
+Deptherr_sk = [4.993115 if math.isnan(x) else x for x in Deptherr_sk]
+scaler_2 = MinMaxScaler()
+Deptherr_sk = np.array(Deptherr_sk)
+Deptherr_sk = Deptherr_sk.reshape(-1,1)
+Deptherr_sk = scaler_2.fit_transform(Deptherr_sk)
+print(Deptherr_sk)
+Data_scaled.iloc[:,2] = Deptherr_sk
+Data_scaled.head()
+
+#%%Dss 275.364098
+Data.drop(Data.columns[2], axis=1, inplace=True)
+Data_scaled.drop(Data_scaled.columns[2], axis=1, inplace=True)
+Data.drop(Data.columns[3], axis=1, inplace=True)
+Data_scaled.drop(Data_scaled.columns[3], axis=1, inplace=True)
+Data.drop(Data.columns[5], axis=1, inplace=True)
+Data_scaled.drop(Data_scaled.columns[5], axis=1, inplace=True)
+Data.dtypes
+
+#%%Magnitude
+Magnitude = list(Data.iloc[:,2])
+Magnitude = [5.8825 if math.isnan(x) else x for x in Magnitude]
+scaler_3 = MinMaxScaler()
+Magnitude = np.array(Magnitude)
+Magnitude = Magnitude.reshape(-1,1)
+Magnitude = scaler_3.fit_transform(Magnitude)
+print(Magnitude)
+Data_scaled.iloc[:,2] = Magnitude
+Data_scaled.head()
+
+#%%Azimuthal Gap
+Data_scaled.describe()
+AZgap = list(Data.iloc[:,3])
+AZgap = [44.163532 if math.isnan(x) else x for x in AZgap]
+scaler_4 = MinMaxScaler()
+AZgap = np.array(AZgap)
+AZgap = AZgap.reshape(-1,1)
+AZgap = scaler_4.fit_transform(AZgap)
+print(AZgap)
+Data_scaled.iloc[:,3] = AZgap
