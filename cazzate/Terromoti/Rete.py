@@ -1,4 +1,4 @@
-#%%importiamo le librerie Tutto questo con la partecipazione di Marco De vellis, for commercial use macsdeve@gmail.com eleggetelo presidente e fategli un bocchino che se lo merita!
+#%%importiamo le librerie
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
