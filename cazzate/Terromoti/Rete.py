@@ -91,9 +91,9 @@ for x in range(Type.size):
         Earthquake = Earthquake+1
 Earthquake
 #dovremo one-hot encodare questa feature
-
+Data.head()
 #%%Occupiamoci della magnitude type:
-Raw_data.iloc[:,9].unique()
+Raw_data.iloc[:,8].unique()
 # ML: magnitudo locale (Richter)
 # MS: Surface wave magnitude scale
 # MB: Body wave magnitude scale: "body-wave magnitude" developed to
@@ -170,3 +170,61 @@ AZgap = AZgap.reshape(-1,1)
 AZgap = scaler_4.fit_transform(AZgap)
 print(AZgap)
 Data_scaled.iloc[:,3] = AZgap
+Data.describe()
+
+#%%Horizontal_distance
+Hdis = list(Data.iloc[:,4])
+Hdis = [3.992660 if math.isnan(x) else x for x in Hdis]
+scaler_5 = MinMaxScaler()
+Hdis = np.array(Hdis)
+Hdis = Hdis.reshape(-1,1)
+Hdis = scaler_5.fit_transform(Hdis)
+print(Hdis)
+Data_scaled.iloc[:,4] = Hdis
+Data.head()
+#%%Reshapiamo l'array
+Data_scaled = Data_scaled.values
+Data_scaled.shape
+Data_scaled = Data_scaled.reshape(1,23412,27)
+
+x_train = Data_scaled[:,:17560, 1:]
+print(x_train.shape)
+
+y_train = Data_scaled[:,:17560,0]
+y_train = y_train.reshape(1,17560,1)
+print(y_train.shape)
+
+x_test = Data_scaled[:,17560:, 1:]
+print(x_test.shape)
+
+y_test = Data_scaled[:,17560:,0]
+y_test = y_test.reshape(1,-1,1)
+print(y_test.shape)
+
+#%%Architecture
+model = Sequential()
+
+model.add(Bidirectional(LSTM(32, return_sequences = True, input_shape=(1,23412,27))))
+model.add(Dropout(0.20))
+
+model.add(Bidirectional(LSTM(32, return_sequences = True, input_shape=(1,23412,27))))
+model.add(Dropout(0.20))
+
+model.add(Bidirectional(LSTM(32, return_sequences = False, input_shape=(1,23412,27))))
+model.add(Dropout(0.20))
+
+model.add(Bidirectional(LSTM(32, return_sequences = True, input_shape=(1,23412,27))))
+model.add(Dropout(0.20))
+
+model.add(Bidirectional(LSTM(32, return_sequences = True, input_shape=(1,23412,27))))
+model.add(Dropout(0.20))
+
+model.add(Bidirectional(LSTM(32, return_sequences = False, input_shape=(1,23412,27))))
+model.add(Dropout(0.20))
+
+model.add(Dense(1))
+
+model.compile(optimizer = 'Adam', loss='mean_squared_error', metrics=['accuracy','mean_squared_error'])
+
+#%%trainiamo la rete
+model.fit(x_train, y_train, verbose = 2, epochs = 30, batch_size = 32 )
